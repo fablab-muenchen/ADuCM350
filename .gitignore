@@ -2,3 +2,9 @@ BUILD/
 Debug/
 .swp
 Release/
+src
+src/*
+.settings
+.settings/*
+.project
+
