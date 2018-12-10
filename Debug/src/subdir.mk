@@ -5,7 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/AfeTest.c \
-../src/BlinkyTest.c \
+../src/CitizenSensor.c \
 ../src/FlashTest.c \
 ../src/PinMux.c \
 ../src/Timer.c \
@@ -17,7 +17,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/AfeTest.o \
-./src/BlinkyTest.o \
+./src/CitizenSensor.o \
 ./src/FlashTest.o \
 ./src/PinMux.o \
 ./src/Timer.o \
@@ -29,7 +29,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/AfeTest.d \
-./src/BlinkyTest.d \
+./src/CitizenSensor.d \
 ./src/FlashTest.d \
 ./src/PinMux.d \
 ./src/Timer.d \

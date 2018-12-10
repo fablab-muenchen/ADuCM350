@@ -50,38 +50,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-firm.hex \
+hat_firmware.hex \
 
 SECONDARY_SIZE += \
-firm.siz \
+hat_firmware.siz \
 
 
 # All Target
-all: firm.elf secondary-outputs
+all: hat_firmware.elf secondary-outputs
 
 # Tool invocations
-firm.elf: $(OBJS) $(USER_OBJS)
+hat_firmware.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T "/home/dev/repros/ADuCM350/ldscripts/mem.ld" -T "/home/dev/repros/ADuCM350/ldscripts/libs.ld" -T "/home/dev/repros/ADuCM350/ldscripts/sections.ld" -nostartfiles -nodefaultlibs -nostdlib -Xlinker --gc-sections -L"/home/dev/repros/ADuCM350/lib" -L"../ldscripts" -Wl,-Map,"firm.map" --specs=nano.specs -o "firm.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m3 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T "/home/dev/repros/ADuCM350/ldscripts/mem.ld" -T "/home/dev/repros/ADuCM350/ldscripts/libs.ld" -T "/home/dev/repros/ADuCM350/ldscripts/sections.ld" -nostartfiles -nodefaultlibs -nostdlib -Xlinker --gc-sections -L"/home/dev/repros/ADuCM350/lib" -L"../ldscripts" -Wl,-Map,"hat_firmware.map" --specs=nano.specs -o "hat_firmware.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-firm.hex: firm.elf
+hat_firmware.hex: hat_firmware.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O ihex "firm.elf"  "firm.hex"
+	arm-none-eabi-objcopy -O ihex "hat_firmware.elf"  "hat_firmware.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-firm.siz: firm.elf
+hat_firmware.siz: hat_firmware.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "firm.elf"
+	arm-none-eabi-size --format=berkeley "hat_firmware.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) firm.elf
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) hat_firmware.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)
